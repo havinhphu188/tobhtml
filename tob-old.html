@@ -1,0 +1,370 @@
+
+<!--
+
+    //*******************************************************************************
+    // * Copyright (c) 2011-2014 CSC.
+    // * Copyright (C) 2010-2016 CSC - All rights reserved.
+    // *
+    // * The information contained in this document is the exclusive property of
+    // * CSC.  This work is protected under USA copyright law
+    // * and the copyright laws of given countries of origin and international
+    // * laws, treaties and/or conventions. No part of this document may be
+    // * reproduced or transmitted in any form or by any means, electronic or
+    // * mechanical including photocopying or by any informational storage or
+    // * retrieval system, unless as expressly permitted by CSC.
+    //
+    // * Design, Develop and Manage by Team Integral Point-of-Sales & Services
+    // ******************************************************************************
+
+-->
+
+
+<!-- Category Details -->
+<div fieldId="illustration-tob:TableOfBenefits"
+	class="col-xs-12 no-padding">
+	<!-- é¡¯ç¤ºä¸»è¡¨ -->
+	<div class="col-xs-12" id="v4-table-benefits">
+
+		<!-- Table header -->
+		<div class="table-header">
+			<!-- Table header: left-side column -->
+			<div class="table-left-side">
+				<div class="table-cell">
+					<md-tooltip md-direction="top">{{'v4.quotation.label.Benefit&Coverage'
+					| translate}}</md-tooltip>
+					{{'v4.quotation.label.Benefit&Coverage' | translate}}
+
+					<button ng-if="tobData.typeCode === 'EXP'"
+						class="md-fab md-raised md-mini md-button md-ink-ripple"
+						type="button" ng	-transclude="" ng-click="highlightAll(true)"
+						id="compareTob" ng-show="true" aria-label="Validate"
+						md-labeled-by-tooltip="md-tooltip-3" aria-hidden="false">
+						<i class="fa fa-list ng-scope"></i>
+						<div class="md-ripple-container" style=""></div>
+					</button>
+				</div>
+			</div>
+			<!-- Table header: main column -->
+			<div class="table-main-col table-responsive">
+				<!-- loop through each category in current emirate -->
+				<div ng-repeat="category in moduleService.tob.categories.value">
+					<div class="table-cell"
+						ng-class="{'highlighting-cell':$index%2===1 && tobData.quotationType ==='EXP' }">
+						<md-tooltip md-direction="top">{{category.categoryName.value}}
+						- {{'v4.contact.Emirate.' + category.emirateId.value | translate}}</md-tooltip>
+						{{category.categoryName.value}} - {{'v4.contact.Emirate.' +
+						category.emirateId.value | translate}} <span
+							ng-if="$index%2===1 && tobData.quotationType ==='EXP'">
+							{{'v4.quotation.label.LastYearCover' | translate}}</span>
+
+					</div>
+				</div>
+			</div>
+			<div style="width: 0px;" />
+		</div>
+
+		<!-- Table content -->
+		<div class="table-header tob-template">
+
+			<!-- Left-side column -->
+			<div class="table-left-side table-responsive">
+
+				<!-- Content group: Regulator -->
+				<div class="table-content-group">
+					<!-- Content: sub-header row -->
+					<div class="table-cell table-sub-header">
+						<md-tooltip md-direction="top">{{'v4.quotation.label.Regulator'
+						| translate}}</md-tooltip>
+						{{'v4.quotation.label.Regulator' | translate}}
+					</div>
+				</div>
+
+				<!-- Content group: TOB Template -->
+				<div class="table-content-group">
+					<!-- Content: sub-header row -->
+					<div class="table-cell table-sub-header">
+						<md-tooltip md-direction="top">{{'v4.quotation.label.TOBTemplate'
+						| translate}}</md-tooltip>
+						{{'v4.quotation.label.TOBTemplate' | translate}}
+					</div>
+				</div>
+			</div>
+
+			<!-- Main column -->
+			<div class="table-main-col table-responsive">
+
+				<!-- loop through each category in current emirate -->
+				<div
+					ng-repeat="(categoryKey, category) in renderViewForBenefitModel.regulator">
+
+					<!-- Content group: Regulator -->
+					<div class="table-content-group">
+						<!-- Content: sub-header row -->
+						<div
+							ng-class="{'highlight-data-cell' : category.regulatorId.meta.isDifferent}"
+							class="table-cell">
+							<select ui-select2 ng-model="category.regulatorId.value"
+								ng-change="updateRegulatorIdAndNameToQuoModel(category); getTemplateByRegulator(category);"
+								child-ui-element="category.regulatorId.meta"
+								ng-disabled="moduleService.isFreezeDoc">
+								<option
+									ng-repeat="option in moduleService.listRegulatorByEmirate"
+									value="{{option.regulatorId}}">
+									{{option.regulatorName}}
+								</option>
+							</select>
+						</div>
+					</div>
+
+					<!-- Content group: TOB Template -->
+					<!-- currently , I use regulator loop to loop through this tobTemplate, to reuse existing tob.html, Separate into independent loop later if needed -->
+					<div class="table-content-group">
+						<!-- Content: sub-header row -->
+						<div
+							class="table-cell">
+							<select ui-select2 ng-model="renderViewForBenefitModel.tobTemplate[categoryKey].tobTemplateCode.value"
+								ng-change="updateTobTemplateCodeAndNameToQuoModel(renderViewForBenefitModel.tobTemplate[categoryKey],category.regulatorId.value);"
+								ng-disabled="moduleService.isFreezeDoc">
+								<option
+									ng-repeat="option in moduleService.listTemplateByRegulator[category.regulatorId.value]"
+									value="{{option.tobId}}">
+									{{option.tobName}}
+								</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div style="width: 0px;" />
+		</div>
+
+
+
+		<!-- main table data  -->
+
+		<div class="" sync-scroll sync-scroll-top=".table-main-data"
+			sync-scroll-left=".table-header .table-main-col">
+			<div class="table-main-data">
+				<div class="col-xs-3 no-padding">
+					<div
+					ng-repeat="(benefitKey,benefit) in renderViewForBenefitModel.benefits">
+					<!-- Benefit header  -->
+					<div class="table-row-tob">
+						<!-- Benefit header key -->
+						<div class="table-left-side table-responsive">
+							<div class="">
+								<!-- Content: sub-header row -->
+								<div class="table-cell benefit-header">
+									<md-tooltip md-direction="top">{{benefitKey}}</md-tooltip>
+									{{benefitKey}}
+								</div>
+							</div>
+
+						</div>
+						<div style="width: 0px;" />
+					</div>
+
+					<!-- Loop through property of current benefit -->
+					<div class="table-row-tob"
+						ng-repeat="(benefitPropertyKey,benefitProperty) in benefit[listOfAllCategoryId[0]].property">		
+
+						<!--benefit property key-->
+						<div class="table-left-side table-responsive">
+							<div class=" ">
+								<div class="table-cell">
+									<md-tooltip md-direction="top">{{benefitPropertyKey}}</md-tooltip>
+									{{benefitPropertyKey}}
+								</div>
+							</div>
+						</div>
+						<div style="width: 0px;" />
+					</div>
+
+
+					<!-- Loop through all coverage in current benefit -->
+					<div
+						ng-repeat="(coverageKey,coverage) in benefit[listOfAllCategoryId[0]].coverage">
+						<div class="table-row-tob ">
+							<div class="table-left-side table-responsive">
+								<div class=" ">
+									<!-- coverage header key -->
+									<div class="table-cell coverage-header">
+										<md-tooltip md-direction="top">{{coverageKey}}</md-tooltip>
+										{{coverageKey}}
+									</div>
+								</div>
+							</div>
+							<div style="width: 0px;" />
+						</div>
+
+						<!-- loop through coverage property of current coverage  -->
+						<div class="table-row-tob"
+							ng-repeat="(coveragePropertyKey,coverageProperty) in coverage">
+							<!-- coverage property header key-->
+							<div class="table-left-side table-responsive">
+								<div class=" ">
+									<div class="table-cell coverage-value-cell ">
+										<md-tooltip md-direction="top">{{coveragePropertyKey}}</md-tooltip>
+										{{coveragePropertyKey}}
+									</div>
+								</div>
+							</div>
+							<div style="width: 0px;" />
+						</div>
+					</div>
+
+				</div>
+				</div>
+				<div class="col-xs-9 no-padding">
+					<div
+					ng-repeat="(benefitKey,benefit) in renderViewForBenefitModel.benefits">
+					<!-- Benefit header  -->
+					<div class="table-row-tob">
+						
+
+						<!-- Spacing column for benefit header -->
+						<div class="table-main-col table-responsive">
+							<div ng-repeat="(categoryKey,category) in benefit">
+								<div class=" ">
+									<div class="table-cell benefit-header ">
+										<div class="benefit-action col-xs-5 no-padding">
+											<md-fab-speed-dial md-direction="down" class="md-scale">
+											<md-fab-trigger> <md-button
+												aria-label="menu" class="md-fab md-primary"> <i
+												class="fa fa-bars" /> </md-button> </md-fab-trigger> <md-fab-actions> <md-button
+												class="md-fab md-raised md-mini" id="DeleteBenefit"
+												ng-disabled="moduleService.isFreezeDoc"
+												ng-click="deleteBenefitGroup(key)"> <md-tooltip
+												md-direction="left">{{'v4.quotation.label.DeleteBenefit'
+											| translate}}</md-tooltip> <i class="fa fa-trash-o fa-2x" /> </md-button> </md-fab-actions> </md-fab-speed-dial>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+						<div style="width: 0px;" />
+					</div>
+
+					<!-- Loop through property of current benefit -->
+					<div class="table-row-tob"
+						ng-repeat="(benefitPropertyKey,benefitProperty) in benefit[listOfAllCategoryId[0]].property">
+						
+
+						<!--benefit property value -->
+						<div class="table-main-col table-responsive">
+							<div ng-repeat="(categoryKey,category) in benefit">
+								<div class=" ">
+									<div class="table-cell coverage-value-cell">
+										<div class="col-xs-11 no-padding">
+											{{category.property[benefitPropertyKey].value.value}}
+										</div>
+										<div class="editable-cell-action col-xs-1 no-padding">
+											<md-button class="md-icon-button md-primary"
+												aria-label="edit coverage"
+												ng-click="showTOBDialog(
+												   				$event,
+												   				{	
+												   				})"
+												ng-disabled="moduleService.isFreezeDoc"> <i
+												class="fa fa-pencil" /> </md-button>
+										</div>
+
+
+									</div>
+
+
+								</div>
+							</div>
+						</div>
+						<div style="width: 0px;" />
+					</div>
+
+
+					<!-- Loop through all coverage in current benefit -->
+					<div
+						ng-repeat="(coverageKey,coverage) in benefit[listOfAllCategoryId[0]].coverage">
+						<div class="table-row-tob ">
+							
+
+
+							<!-- Spacing column for coverage header -->
+							<div class="table-main-col table-responsive">
+								<div ng-repeat="(categoryKey,category) in benefit">
+									<div class=" ">
+										<div class="table-cell coverage-header">
+											<div class="col-xs-11 no-padding">
+												{{category.coverage[coverageKey][coveragePropertyKey].value.value}}
+											</div>
+											<div class="editable-cell-action col-xs-1 no-padding">
+												<md-button class="md-icon-button md-primary"
+													aria-label="edit coverage"
+													ng-click="showTOBDialog(
+											   				$event,
+											   				{	
+											   				})"
+													ng-disabled="moduleService.isFreezeDoc"> <i
+													class="fa fa-pencil" /> </md-button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div style="width: 0px;" />
+						</div>
+
+						<!-- loop through coverage property of current coverage  -->
+						<div class="table-row-tob"
+							ng-repeat="(coveragePropertyKey,coverageProperty) in coverage">
+							
+
+							<!-- coverage property value, loop through category -->
+							<div class="table-main-col table-responsive">
+								<div ng-repeat="(categoryKey,category) in benefit">
+									<div class="table-cell coverage-value-cell">
+										<div class="col-xs-11 no-padding">
+											{{category.coverage[coverageKey][coveragePropertyKey].value.value}}
+										</div>
+										<div class="editable-cell-action col-xs-1 no-padding">
+											<md-button class="md-icon-button md-primary"
+												aria-label="edit coverage"
+												ng-click="showTOBDialog(
+												   				$event,
+												   				{	
+												   				})"
+												ng-disabled="moduleService.isFreezeDoc"> <i
+												class="fa fa-pencil" /> </md-button>
+										</div>
+
+
+									</div>
+								</div>
+							</div>
+							<div style="width: 0px;" />
+						</div>
+					</div>
+
+				</div>
+				</div>
+				
+
+			</div>
+
+
+
+		</div>
+
+	</div>
+</div>
+<div fieldId="illustration-tob:AddBenefit" class="col-xs-12"
+	ng-if="tobData.isStandard === 'false' && isVisibleButtonAddBenefit === true">
+	<div class="row v4-materialize-container">
+		<md-button id="add-benefit" class="md-fab md-warn"
+			aria-label="add benefit"
+			ng-click="showTOBDialog($event,{mode: constants.TOB_DIALOG.MODE.ADD_BENEFIT})"
+			ng-disabled="moduleService.isFreezeDoc"> <i
+			class="fa fa-plus" />
+		<div>{{'v4.quotation.label.AddBenefit' | translate}}</div>
+		</md-button>
+	</div>
+</div>
