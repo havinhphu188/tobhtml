@@ -9,89 +9,109 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="tobjs.js"></script>
     <style>
-       #v4-table-benefits-new-ui.main-frame {
-        background-color: #b5fff5;
-        width: 80vw;
-        height: 45vw;
-    }
-    
-    #v4-table-benefits-new-ui .left-side {
-        width: 25vw;
-        height: 25vw;
-        background-color: #168D2A;
-        overflow: hidden;
-        float: left;
-    }
-    
-    #v4-table-benefits-new-ui .label-cell {
-        width: 25vw;
-        height: 70px;
-        background-color: #792a2a;
-        margin-bottom: 5px;
-    }
-    
-    #v4-table-benefits-new-ui .main-col {
-        background-color: #D969F0;
-        width: 53vw;
-        height: 25vw;
-        float: left;
-        overflow-x: scroll;
-    }
-    
-    #v4-table-benefits-new-ui .data-row {
-        background-color: #2B2EE2;
-        height: 70px;
-        margin-bottom: 5px;
-        display: inline-flex;
-    }
-    
-    #v4-table-benefits-new-ui .data-cell-inline {
-        width: 20vw;
-        height: 70px;
-        background-color: #639612;
-        margin-bottom: 5px;
-        margin-left: 5px;
-        float: left;
-    }
-    
-    #v4-table-benefits-new-ui .title-row {
-        background-color: #BD5D1E;
-        height: 70px;
-        margin-bottom: 5px;
-        display: inline-flex;
-    }
-    
-    #v4-table-benefits-new-ui .static-cell {
-        width: 25vw;
-        height: 70px;
-        background-color: #592A79;
-        margin-bottom: 5px;
-    }
-    
-    #v4-table-benefits-new-ui .title-cell-inline {
-        width: 20vw;
-        height: 70px;
-        background-color: #7DDD0F;
-        margin-bottom: 5px;
-        margin-left: 5px;
-        float: left;
-    }
-    
-    #v4-table-benefits-new-ui .scrollable-title {
-        background-color: #00798F;
-        height: 70px;
-        margin-bottom: 5px;
-        float: left;
-        display: inline-flex;
-    }
-    
-    #v4-table-benefits-new-ui .title-scroll-frame {
-        background-color: #F069B8;
-        width: 53vw;
-        height: 70px;
-        float: left;
-        overflow: hidden;
-    }
+        #v4-table-benefits-new-ui.main-frame {
+            background-color: #b5fff5;
+            width: 80vw;
+            height: 45vw;
+        }
+
+        #v4-table-benefits-new-ui .left-side {
+            width: 25vw;
+            height: 25vw;
+            background-color: #168D2A;
+            overflow: hidden;
+            float: left;
+        }
+
+
+
+        #v4-table-benefits-new-ui .label-cell {
+            width: 25vw;
+            height: 70px;
+            background-color: #792a2a;
+            margin-bottom: 5px;
+        }
+
+        #v4-table-benefits-new-ui .main-row-container {
+            background-color: #D969F0;
+            width: 53vw;
+            height: 25vw;
+            float: left;
+            overflow-x: scroll;
+        }
+
+        #v4-table-benefits-new-ui .main-col-container {
+            background-color: #D969F0;
+            width: 53vw;
+            height: 25vw;
+            float: left;
+            overflow-x: scroll;
+            display: inline-flex;
+        }
+
+        #v4-table-benefits-new-ui .data-col {
+            width: 20vw;
+            height: fit-content;
+            background-color: #168D2A;
+            float: left;
+            margin-left: 5px;
+        }
+
+
+        #v4-table-benefits-new-ui .data-row {
+            background-color: #2B2EE2;
+            height: 70px;
+            margin-bottom: 5px;
+            display: inline-flex;
+        }
+
+
+        #v4-table-benefits-new-ui .data-cell-inline {
+            width: 20vw;
+            height: 70px;
+            background-color: #639612;
+            margin-bottom: 5px;
+            float: left;
+        }
+
+        #v4-table-benefits-new-ui .title-row {
+            background-color: #BD5D1E;
+            height: 70px;
+            margin-bottom: 5px;
+            display: inline-flex;
+        }
+
+        #v4-table-benefits-new-ui .static-cell {
+            width: 25vw;
+            height: 70px;
+            background-color: #592A79;
+            margin-bottom: 5px;
+        }
+
+        #v4-table-benefits-new-ui .title-cell-inline {
+            width: 20vw;
+            height: 70px;
+            background-color: #7DDD0F;
+            margin-bottom: 5px;
+            margin-left: 5px;
+            float: left;
+        }
+
+        #v4-table-benefits-new-ui .scrollable-title {
+            background-color: #00798F;
+            height: 70px;
+            margin-bottom: 5px;
+            float: left;
+            display: inline-flex;
+        }
+
+        #v4-table-benefits-new-ui .title-scroll-frame {
+            background-color: #F069B8;
+            width: 53vw;
+            height: 70px;
+            float: left;
+            overflow: hidden;
+        }
     </style>
 </head>
 
@@ -126,149 +146,59 @@
                 <div class="label-cell"></div>
                 <div class="label-cell"></div>
                 <div class="label-cell"></div>
-                
+
             </div>
-            <div class="main-col" id="div_main-col">
-                <div class="data-row">
-                    <div class="data-cell-inline">
-                    </div>
-                    <div class="data-cell-inline">
-                    </div>
-                    <div class="data-cell-inline">
-                    </div>
-                    <div class="data-cell-inline">
-                    </div>
-                    <div class="data-cell-inline">
-                    </div>
-                    <div class="data-cell-inline">
-                    </div>
+            <div class="main-col-container" id="div_main-col">
+                <div class="data-col">
+                    <div class="data-cell-inline"></div>
+                    <div class="data-cell-inline"></div>
+                    <div class="data-cell-inline"></div>
+                    <div class="data-cell-inline"></div>
+                    <div class="data-cell-inline"></div>
+                    <div class="data-cell-inline"></div>
                 </div>
-                <div class="data-row">
-                    <div class="data-cell-inline">
-                    </div>
-                    <div class="data-cell-inline">
-                    </div>
-                    <div class="data-cell-inline">
-                    </div>
-                    <div class="data-cell-inline">
-                    </div>
-                    <div class="data-cell-inline">
-                    </div>
-                    <div class="data-cell-inline">
-                    </div>
+                <div class="data-col">
+                    <div class="data-cell-inline"></div>
+                    <div class="data-cell-inline"></div>
+                    <div class="data-cell-inline"></div>
+                    <div class="data-cell-inline"></div>
+                    <div class="data-cell-inline"></div>
+                    <div class="data-cell-inline"></div>
                 </div>
-                <div class="data-row">
-                    <div class="data-cell-inline">
-                    </div>
-                    <div class="data-cell-inline">
-                    </div>
-                    <div class="data-cell-inline">
-                    </div>
-                    <div class="data-cell-inline">
-                    </div>
-                    <div class="data-cell-inline">
-                    </div>
-                    <div class="data-cell-inline">
-                    </div>
+                <div class="data-col">
+                    <div class="data-cell-inline"></div>
+                    <div class="data-cell-inline"></div>
+                    <div class="data-cell-inline"></div>
+                    <div class="data-cell-inline"></div>
+                    <div class="data-cell-inline"></div>
+                    <div class="data-cell-inline"></div>
                 </div>
-                <div class="data-row">
-                    <div class="data-cell-inline">
-                    </div>
-                    <div class="data-cell-inline">
-                    </div>
-                    <div class="data-cell-inline">
-                    </div>
-                    <div class="data-cell-inline">
-                    </div>
-                    <div class="data-cell-inline">
-                    </div>
-                    <div class="data-cell-inline">
-                    </div>
+                <div class="data-col">
+                    <div class="data-cell-inline"></div>
+                    <div class="data-cell-inline"></div>
+                    <div class="data-cell-inline"></div>
+                    <div class="data-cell-inline"></div>
+                    <div class="data-cell-inline"></div>
+                    <div class="data-cell-inline"></div>
                 </div>
-                <div class="data-row">
-                    <div class="data-cell-inline">
-                    </div>
-                    <div class="data-cell-inline">
-                    </div>
-                    <div class="data-cell-inline">
-                    </div>
-                    <div class="data-cell-inline">
-                    </div>
-                    <div class="data-cell-inline">
-                    </div>
-                    <div class="data-cell-inline">
-                    </div>
+                <div class="data-col">
+                    <div class="data-cell-inline"></div>
+                    <div class="data-cell-inline"></div>
+                    <div class="data-cell-inline"></div>
+                    <div class="data-cell-inline"></div>
+                    <div class="data-cell-inline"></div>
+                    <div class="data-cell-inline"></div>
                 </div>
-                <div class="data-row">
-                    <div class="data-cell-inline">
-                    </div>
-                    <div class="data-cell-inline">
-                    </div>
-                    <div class="data-cell-inline">
-                    </div>
-                    <div class="data-cell-inline">
-                    </div>
-                    <div class="data-cell-inline">
-                    </div>
-                    <div class="data-cell-inline">
-                    </div>
+                <div class="data-col">
+                    <div class="data-cell-inline"></div>
+                    <div class="data-cell-inline"></div>
+                    <div class="data-cell-inline"></div>
+                    <div class="data-cell-inline"></div>
+                    <div class="data-cell-inline"></div>
+                    <div class="data-cell-inline"></div>
                 </div>
-                <div class="data-row">
-                    <div class="data-cell-inline">
-                    </div>
-                    <div class="data-cell-inline">
-                    </div>
-                    <div class="data-cell-inline">
-                    </div>
-                    <div class="data-cell-inline">
-                    </div>
-                    <div class="data-cell-inline">
-                    </div>
-                    <div class="data-cell-inline">
-                    </div>
-                </div>
-                <div class="data-row">
-                    <div class="data-cell-inline">
-                    </div>
-                    <div class="data-cell-inline">
-                    </div>
-                    <div class="data-cell-inline">
-                    </div>
-                    <div class="data-cell-inline">
-                    </div>
-                    <div class="data-cell-inline">
-                    </div>
-                    <div class="data-cell-inline">
-                    </div>
-                </div>
-                <div class="data-row">
-                    <div class="data-cell-inline">
-                    </div>
-                    <div class="data-cell-inline">
-                    </div>
-                    <div class="data-cell-inline">
-                    </div>
-                    <div class="data-cell-inline">
-                    </div>
-                    <div class="data-cell-inline">
-                    </div>
-                    <div class="data-cell-inline">
-                    </div>
-                </div>
-                <div class="data-row">
-                    <div class="data-cell-inline">
-                    </div>
-                    <div class="data-cell-inline">
-                    </div>
-                    <div class="data-cell-inline">
-                    </div>
-                    <div class="data-cell-inline">
-                    </div>
-                    <div class="data-cell-inline">
-                    </div>
-                    <div class="data-cell-inline">
-                    </div>
-                </div>
+
+                
 
             </div>
         </div>
